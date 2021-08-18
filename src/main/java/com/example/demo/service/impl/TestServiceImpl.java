@@ -4,6 +4,7 @@ import com.example.demo.dao.TestDao;
 import com.example.demo.entity.Test;
 import com.example.demo.example.TestExample;
 import com.example.demo.service.TestService;
+import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,6 +21,10 @@ public class TestServiceImpl implements TestService {
     @Resource
     private TestDao testDao;
 
+    @Resource
+    private RestHighLevelClient highLevelClient;
+
+
     @Override
     public List<Test> test() {
         TestExample testExample = new TestExample();
@@ -32,4 +37,7 @@ public class TestServiceImpl implements TestService {
     public Test unique() {
         return testDao.selectByPrimaryKey(1L);
     }
+
+
+
 }

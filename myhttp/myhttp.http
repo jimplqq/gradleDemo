@@ -1,4 +1,9 @@
-GET http://localhost:7701/test/test
+GET http://localhost:7701/test/test2
+Accept: application/json
+
+###
+
+GET http://localhost:7701/test/test1
 Accept: application/json
 
 ###

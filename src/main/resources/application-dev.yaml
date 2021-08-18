@@ -1,6 +1,10 @@
 server:
   port: 7701
 spring:
+  data:
+    elasticsearch:
+      cluster-name: demo
+      cluster-nods: 127.0.0.1:9200
   task:
     scheduling:
       pool:
@@ -66,6 +70,9 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
+
+elasticsearch:
+  ip: localhost:9200
 
 
 
