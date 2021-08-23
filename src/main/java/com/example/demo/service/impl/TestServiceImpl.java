@@ -38,6 +38,10 @@ public class TestServiceImpl implements TestService {
         return testDao.selectByPrimaryKey(1L);
     }
 
-
-
+    @Override
+    public boolean insert() {
+        Test test = new Test();
+        test.setName("a");
+        return testDao.insertSelective(test) > 0;
+    }
 }
