@@ -11,7 +11,7 @@ import java.util.List;
  * @Author: gin
  * @Date: 2021/7/28 上午9:51
  */
-public class TestAdapter implements TestService {
+public class TestAdapter {
     private final TestServiceImpl testService;
 
     public TestAdapter(TestServiceImpl testService) {
@@ -19,18 +19,8 @@ public class TestAdapter implements TestService {
     }
 
 
-    @Override
-    public List<Test> test() {
-        return testService.test();
-    }
-
-    @Override
-    public Test unique() {
-        return testService.unique();
-    }
-
     public static void main(String[] args) {
         TestAdapter testAdapter = new TestAdapter(new TestServiceImpl());
-        testAdapter.test();
+        //testAdapter.test();
     }
 }

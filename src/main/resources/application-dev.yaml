@@ -18,6 +18,23 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
+  redis:
+    #通过前置追加spring.application.name重新构建key
+    build_name: true
+    host: 127.0.0.1
+    port: 6379
+    password:
+    jedis:
+      pool:
+        max-active: 200
+        max-wait: 1
+        max-idle: 10
+        min-idle: 0
+        # 连接超时时间（毫秒）
+    timeout: 1000
+    count: 1800
+    #正式环境使用1，其他环境禁止使用
+    database: 0
   jackson:
     # 设置属性命名策略,对应jackson下PropertyNamingStrategy中的常量值，SNAKE_CASE-返回的json驼峰式转下划线，json body下划线传到后端自动转驼峰式
     #    property-naming-strategy: SNAKE_CASE

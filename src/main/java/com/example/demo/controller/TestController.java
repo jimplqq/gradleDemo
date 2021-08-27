@@ -3,10 +3,13 @@ package com.example.demo.controller;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
+import com.alibaba.fastjson.JSON;
 import com.example.demo.akka.works.TestActor;
 import com.example.demo.config.akka.SpringExtension;
 import com.example.demo.entity.Test;
+import com.example.demo.proxy.MyCglibProxyFactory;
 import com.example.demo.service.TestService;
+import com.example.demo.service.impl.TestServiceImpl;
 import com.example.demo.util.thread.ThreadExecutor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @Author: gin
@@ -24,7 +29,8 @@ import java.util.concurrent.CompletableFuture;
 @RestController
 @RequestMapping("test")
 public class TestController {
-
+    @Resource
+    private TestService testService;
 
     private final ActorRef testActor1;
     private final ActorRef testActor2;
@@ -35,6 +41,19 @@ public class TestController {
                                   SpringExtension springExtension) {
         testActor1 = actorSystem.actorOf(springExtension.props("testActor"), "testActor1");
         testActor2 = actorSystem.actorOf(springExtension.props("testActor"), "testActor2");
+    }
+
+    @GetMapping("unique")
+    public void unique() {
+        TestServiceImpl proxy = (TestServiceImpl) MyCglibProxyFactory.getProxy(TestServiceImpl.class);
+        log.info("unique:response:{}", JSON.toJSONString(proxy.unique()));
+        //completableFutureService.get("test1");
+    }
+
+    @GetMapping("save")
+    public void save() {
+        testService.insert();
+        //completableFutureService.get("test1");
     }
 
 
@@ -57,11 +76,8 @@ public class TestController {
     }
 
     public static void main(String[] args) {
-        try {
-            Integer.parseInt("a");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        CountDownLatch countDownLatch = new CountDownLatch(10);
+
     }
 
 }
