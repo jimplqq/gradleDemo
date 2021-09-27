@@ -1,3 +1,18 @@
+PUT http://localhost:7701/test/update
+Content-Type: application/json
+
+{}
+
+###
+POST https://zk.sceea.cn/RegExam/elogin?resourceId=login
+Content-Type: application/json
+
+{
+  "name": "51302119960124826X",
+  "code": "5131",
+  "pwd": "24826X"}
+
+###
 GET http://localhost:7701/test/test2
 Accept: application/json
 

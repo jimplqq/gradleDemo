@@ -9,7 +9,7 @@ def env = System.getProperty("profile") ?: "dev"
 apply from: "profile-${env}.gradle"
 
 processResources {
-    filter org.apache.tools.ant.filters.ReplaceTokens, tokens: [profileName:env]
+    filter org.apache.tools.ant.filters.ReplaceTokens, tokens: [profileName: env]
 }
 
 sourceSets {
@@ -26,6 +26,7 @@ sourceCompatibility = '8'
 
 repositories {
     mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     maven {
         name 'lucene-snapshots'
         url 'https://s3.amazonaws.com/download.elasticsearch.org/lucenesnapshots/83f9835'
@@ -57,6 +58,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation("com.google.inject:guice:4.2.2")
     implementation("cglib:cglib:3.3.0")
+    implementation("com.squareup.okhttp3:okhttp:4.8.1")
 
     // https://mvnrepository.com/artifact/org.springframework.data/spring-data-elasticsearch
 //    implementation group: 'org.springframework.data', name: 'spring-data-elasticsearch', version: '4.2.4'
@@ -66,9 +68,16 @@ dependencies {
     implementation group: 'org.elasticsearch.client', name: 'elasticsearch-rest-high-level-client', version: '7.14.0'
 
 
-    // https://mvnrepository.com/artifact/com.typesafe.akka/akka-actor
-    implementation group: 'com.typesafe.akka', name: 'akka-actor_2.13', version: '2.6.13'
+    implementation group: 'com.baomidou', name: 'mybatis-plus-boot-starter', version: '3.4.4.3-SNAPSHOT'
+    implementation group: 'com.baomidou', name: 'mybatis-plus-core', version: '3.4.4.3-SNAPSHOT'
+    implementation group: 'com.baomidou', name: 'mybatis-plus-extension', version: '3.4.4.3-SNAPSHOT'
+    implementation group: 'com.baomidou', name: 'mybatis-plus', version: '3.4.4.3-SNAPSHOT'
+//    implementation("com.baomidou:mybatis-mate-starter:1.0.13")
 
+    implementation 'cn.hutool:hutool-all:5.7.12'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
 test {
@@ -87,3 +96,34 @@ allprojects {
         mavenCentral()
     }
 }
+
+
+// 需要继承自DefaultTask
+
+class HelloWorldTask extends DefaultTask {
+    // @Optional 表示在配置该Task时，message是可选的。
+    @Optional
+    @OutputDirectory
+    String message = 'I am kaku'
+    // @TaskAction 表示该Task要执行的动作,即在调用该Task时，hello()方法将被执行
+
+    @TaskAction
+    def hello(){
+        println "hello world $message"
+    }
+}
+
+// hello使用了默认的message值
+task hello(type:HelloWorldTask)
+
+// 重新设置了message的值
+task helloOne(type:HelloWorldTask){
+    message ="I am a android developer"
+}
+
+//task intro {
+//    dependsOn hello
+//    doLast {
+//        println 'intro'
+//    }
+//}

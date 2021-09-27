@@ -1,18 +1,12 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.Test;
-
-import java.util.List;
+import com.example.demo.domain.Test;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
- * @Author: gin
- * @Date: 2021/7/26 上午11:46
+ * @Author gin
+ * @date 2021年9月18日 上午10:50:59
  */
-public interface TestService {
-     List<Test> test();
-
-     Test unique();
-
-     boolean insert();
+public interface TestService extends IService<Test> {
 
 }

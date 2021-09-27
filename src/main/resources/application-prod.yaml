@@ -14,10 +14,10 @@ spring:
   application:
     name: demo
   datasource:
-    url: jdbc:mysql://localhost:3306/dev?characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    url: mpw:+zmFlbV2rY15L9cNGL3f3w13bsZhMa9i3Ew87S4zabZinaDxiIbLDE5WayjvtGS0NPRCy7boIoBqw6jxUa2euCtLmIPZvacpK6ghvOJWV7WVK3eNFFBiSChf9hKprx2BqwXYWqQSi80GkJuLZ9XXb19xYRHzmwz81EQQqsDRTztIXdrVFbla6U8TfenvqU8E
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: dev
-    password: Hkgie1234
+    username: mpw:d1GyLAW7PilUOu7gzUZXLw==
+    password: mpw:VoeH4VzFHcuIh7ORQmhtxQ==
   jackson:
     # 设置属性命名策略,对应jackson下PropertyNamingStrategy中的常量值，SNAKE_CASE-返回的json驼峰式转下划线，json body下划线传到后端自动转驼峰式
     #    property-naming-strategy: SNAKE_CASE
